@@ -1,8 +1,11 @@
 import {notFound} from "next/navigation";
+import {initialData} from "@/seed/seed";
+import {TitleComponent} from "@/components/ui/TitleComponent";
+import {ProductsGrid} from "@/components/shop/ProductsGrid";
 
-interface Props{
-    params:{
-        id:string;
+interface Props {
+    params: {
+        id: string;
     }
 }
 
@@ -10,14 +13,25 @@ export const metadata = {
     title: "Category Page",
     description: "This is the Category page",
 }
-export default function CategoryPage({params}:Props) {
+
+const products = initialData.products;
+
+export default function CategoryPage({params}: Props) {
     const {id} = params;
-    if(id === 'kids'){
+    const productsByGender = products.filter(product => product.gender === id);
+    if (id === 'kids') {
         notFound();
     }
     return (
-       <>
-        <h1>Category Page</h1>
-       </>
+        <>
+            <TitleComponent
+                title="Categoria"
+                subtitle={`Productos para ${id}`}
+                className='mb-2'
+            />
+            <ProductsGrid
+                products={productsByGender}
+            />
+        </>
     );
 }

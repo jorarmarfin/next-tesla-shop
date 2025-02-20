@@ -1,9 +1,10 @@
+import {NotFoundComponent} from "@/components/components";
 
-export default function NotFoundPage({params}:Props) {
+export default function NotFoundPage() {
 
     return (
        <>
-        <h1>Not found Page</h1>
+        <NotFoundComponent />
        </>
     );
 }
